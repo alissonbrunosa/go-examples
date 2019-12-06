@@ -2,55 +2,34 @@ package stack
 
 import "fmt"
 
-type node struct {
-	Data     interface{}
-	Previous *node
-}
-
 type Stack struct {
-	top    *node
-	length int
+	elements []interface{}
 }
 
-func New() *Stack {
-	return &Stack{}
+func (s *Stack) Push(element interface{}) {
+	s.elements = append(s.elements, element)
 }
 
-func (this *Stack) Push(data interface{}) {
-	if this.top == nil {
-		this.top = &node{Data: data}
-	} else {
-		newTop := &node{Data: data}
-		newTop.Previous = this.top
-		this.top = newTop
-	}
-
-	this.length += 1
+func (s *Stack) Pop() interface{} {
+	top := s.elements[len(s.elements)-1]
+	s.elements = s.elements[0 : s.Length()-1]
+	return top
 }
 
-func (this *Stack) Pop() interface{} {
-	top := this.top
-	this.top = top.Previous
-	this.length -= 1
-	return top.Data
+func (s *Stack) Peek() interface{} {
+	return s.elements[len(s.elements)-1]
 }
 
-func (this *Stack) Top() interface{} {
-	return this.top.Data
-}
-
-func (this *Stack) Print() {
-	current := this.top
-	for current != nil {
-		fmt.Printf("Value is %v \n", current.Data)
-		current = current.Previous
+func (s *Stack) Print() {
+	for i := len(s.elements); i >= 0; i-- {
+		fmt.Printf("Value is %v \n", s.elements[i])
 	}
 }
 
-func (this *Stack) IsEmpty() bool {
-	return this.length == 0
+func (s *Stack) IsEmpty() bool {
+	return s.Length() == 0
 }
 
-func (this *Stack) Length() int {
-	return this.length
+func (s *Stack) Length() int {
+	return len(s.elements)
 }

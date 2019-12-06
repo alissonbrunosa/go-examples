@@ -3,44 +3,60 @@ package stack
 import "testing"
 
 func TestPushLength(t *testing.T) {
-	stack := New()
-	stack.Push(1)
+	s := &Stack{}
+	s.Push(1)
 
-	if stack.Length() != 1 {
-		t.Errorf("Length must be 1, got %d", stack.Length())
+	if s.Length() != 1 {
+		t.Errorf("Length must be 1, got %d", s.Length())
 	}
 }
 
 func TestPush(t *testing.T) {
-	stack := New()
-	stack.Push(2)
+	s := &Stack{}
+	s.Push(2)
 
-	if stack.Top() != 2 {
-		t.Errorf("Top must be 2, got %d", stack.Top())
+	if s.Peek() != 2 {
+		t.Errorf("Peek must be 2, got %d", s.Peek())
 	}
 }
 
 func TestPop(t *testing.T) {
-	stack := New()
-	stack.Push(1)
-	stack.Push(2)
-	stack.Push(3)
+	s := &Stack{}
+	s.Push(1)
+	s.Push(2)
+	s.Push(3)
 
-	temp := stack.Pop()
+	temp := s.Pop()
 	if temp != 3 {
 		t.Errorf("Pop should return 3, got %d", temp)
 	}
 }
 
 func TestAfterPop(t *testing.T) {
-	stack := New()
-	stack.Push(1)
-	stack.Push(2)
-	stack.Push(3)
+	s := &Stack{}
+	s.Push(1)
+	s.Push(2)
+	s.Push(3)
 
-	stack.Pop()
+	s.Pop()
 
-	if stack.Length() != 2 {
-		t.Errorf("Length should be 2, got %d", stack.Length())
+	if s.Length() != 2 {
+		t.Errorf("Length should be 2, got %d", s.Length())
 	}
+}
+
+func TestIsEmpty(t *testing.T) {
+	s := &Stack{}
+	s.Push(1)
+
+	if s.IsEmpty() {
+		t.Error("Stack should not be empty")
+	}
+
+	s.Pop()
+
+	if !s.IsEmpty() {
+		t.Error("Stack should be empty")
+	}
+
 }
