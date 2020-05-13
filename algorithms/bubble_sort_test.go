@@ -6,8 +6,8 @@ import (
 )
 
 func TestBubbleSort(t *testing.T) {
-	array := []int{5, 1, 4, 2, 8}
-	expected := []int{1, 2, 4, 5, 8}
+	array := []int{6, 5, 4, 3, 2, 1}
+	expected := []int{1, 2, 3, 4, 5, 6}
 
 	BubbleSort(array)
 

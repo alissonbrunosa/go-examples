@@ -14,26 +14,29 @@ func New() *Tree {
 	return &Tree{}
 }
 
-func (this *Tree) Insert(value int) {
-	if this.Root == nil {
-		this.Root = &node{data: value}
+func (t *Tree) Insert(value int) {
+	if t.Root == nil {
+		t.Root = &node{data: value}
 		return
 	}
-	insert(this.Root, value)
+
+	insert(t.Root, value)
 }
 
-func insert(root *node, value int) {
-	if root.data > value {
-		if root.left == nil {
-			root.left = &node{data: value}
+func insert(n *node, value int) {
+	if n.data > value {
+		if n.left == nil {
+			n.left = &node{data: value}
 			return
 		}
-		insert(root.left, value)
+
+		insert(n.left, value)
 	} else {
-		if root.right == nil {
-			root.right = &node{data: value}
+		if n.right == nil {
+			n.right = &node{data: value}
 			return
 		}
-		insert(root.right, value)
+
+		insert(n.right, value)
 	}
 }
